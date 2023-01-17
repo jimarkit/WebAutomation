@@ -53,6 +53,7 @@ void CCurlHandler::AddHeader(const char *szHeader)
 
 CURLcode CCurlHandler::SendRequest(const char *szURL, long lVerbose)
 {
+  ClearLastResponseBody();
   curl_easy_setopt(m_CURL, CURLOPT_URL, szURL);
   curl_easy_setopt(m_CURL, CURLOPT_VERBOSE, lVerbose);
   CURLcode res = curl_easy_perform(m_CURL);

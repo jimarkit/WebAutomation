@@ -18,18 +18,11 @@ int main(void)
   CCurlHandler objCurlHandler;
   objCurlHandler.SetCallback_ResponseBody(body_callback);
   objCurlHandler.AddHeader("Connection: keep-alive");
-
-  {
-    // Landing page to get cookie
-    objCurlHandler.SendRequest(URL_LIHKG_HOME_PAGE);
-  }
-
-  {
-    // To get latest threads in JSON format
-    objCurlHandler.AddHeader("Referer: https://lihkg.com/category/1");
-    objCurlHandler.ClearLastResponseBody();
-    objCurlHandler.SendRequest(URL_LIHKG_LATEST);
-  }
+  // Home Page, get cookies
+  objCurlHandler.SendRequest(URL_LIHKG_HOME_PAGE);
+  objCurlHandler.AddHeader("Referer: https://lihkg.com/category/1");
+  // Latest, get json of threads
+  objCurlHandler.SendRequest(URL_LIHKG_LATEST);
 
   // Finally, save the response body of the last response
   ofstream fOutput("output.log");

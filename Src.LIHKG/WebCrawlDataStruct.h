@@ -6,7 +6,7 @@
 class CCurlHandler
 {
 public:
-  CCurlHandler(const char *szCookieFile = "./cookies.txt");
+  CCurlHandler(const char *szCookieFile = COOKIES_DEFAULT_PATH);
   ~CCurlHandler();
 
 private:
