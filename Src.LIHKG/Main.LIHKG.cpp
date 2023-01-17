@@ -25,21 +25,9 @@ int main(void)
   }
 
   {
-    // Pretend to be a browser to request dummy js files.
-    objCurlHandler.SendRequest(URL_LIHKG_MISC_JS);
-    objCurlHandler.SendRequest(URL_LIHKG_STYLE_JS);
-    objCurlHandler.SendRequest(URL_LIHKG_MAIN_JS);
-  }
-
-  {
-    // This is the category dictionary of LIHKG
+    // To get latest threads in JSON format
     objCurlHandler.AddHeader("Referer: https://lihkg.com/category/1");
-    objCurlHandler.SendRequest(URL_LIHKG_PROPERTY);
     objCurlHandler.ClearLastResponseBody();
-  }
-
-  {
-    // This is the main interest of this example to get all latest threads
     objCurlHandler.SendRequest(URL_LIHKG_LATEST);
   }
 
