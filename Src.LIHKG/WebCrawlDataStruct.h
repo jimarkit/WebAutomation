@@ -16,6 +16,8 @@ private:
   std::string m_strResponseBody;
 
 public:
+  void CrossPlatformSleep(int s);
+
   void SetCallback_ResponseBody(Callback_ResponseBody cbResponseBody);
 
   void AddHeader(const char *szHeader);
