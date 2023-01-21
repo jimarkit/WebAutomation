@@ -1,7 +1,19 @@
 #include <stdexcept>
-#include <unistd.h>
 #include "WebCrawlConstant.h"
 #include "WebCrawlDataStruct.h"
+
+void CCurlHandler::CrossPlatformSleep(int s)
+{
+  #if defined(_WIN32)
+  #define WIN32_LEAN_AND_MEAN
+  #define VC_EXTRALEAN
+  #include <windows.h>
+  Sleep(1000 * s);
+  #elif defined(__linux__)
+  #include <unistd.h>
+  sleep(s);
+  #endif // Windows/Linux
+}
 
 CCurlHandler::CCurlHandler(const char *szCookieFile)
 {
@@ -57,7 +69,7 @@ CURLcode CCurlHandler::SendRequest(const char *szURL, long lVerbose)
   curl_easy_setopt(m_CURL, CURLOPT_URL, szURL);
   curl_easy_setopt(m_CURL, CURLOPT_VERBOSE, lVerbose);
   CURLcode res = curl_easy_perform(m_CURL);
-  sleep(5);
+  CrossPlatformSleep(5);
   return res;
 }
 
